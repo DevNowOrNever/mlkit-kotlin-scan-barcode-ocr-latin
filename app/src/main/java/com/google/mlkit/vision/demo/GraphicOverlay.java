@@ -25,10 +25,8 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
-
 import com.google.common.base.Preconditions;
 import com.google.common.primitives.Ints;
-
 import java.util.ArrayList;
 import java.util.List;
 

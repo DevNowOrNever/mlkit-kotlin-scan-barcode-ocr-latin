@@ -21,6 +21,7 @@ import android.content.Intent
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -30,7 +31,6 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.mlkit.vision.demo.R
 
@@ -89,21 +89,28 @@ class ChooserActivity :
     private val CLASSES =
       if (VERSION.SDK_INT < VERSION_CODES.LOLLIPOP)
         arrayOf<Class<*>>(
-          CameraXLivePreviewActivity::class.java,
+          LivePreviewActivity::class.java,
+          StillImageActivity::class.java,
         )
       else
         arrayOf<Class<*>>(
-
+          LivePreviewActivity::class.java,
+          StillImageActivity::class.java,
           CameraXLivePreviewActivity::class.java,
+          CameraXSourceDemoActivity::class.java
         )
     private val DESCRIPTION_IDS =
       if (VERSION.SDK_INT < VERSION_CODES.LOLLIPOP)
         intArrayOf(
-          R.string.desc_camerax_live_preview_activity,
+          R.string.desc_camera_source_activity,
+          R.string.desc_still_image_activity,
         )
       else
         intArrayOf(
+          R.string.desc_camera_source_activity,
+          R.string.desc_still_image_activity,
           R.string.desc_camerax_live_preview_activity,
+          R.string.desc_cameraxsource_demo_activity
         )
   }
 }

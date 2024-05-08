@@ -20,23 +20,19 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.Parameters;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.WindowManager;
-
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
-
 import com.google.android.gms.common.images.Size;
-
+import com.google.mlkit.vision.demo.preference.PreferenceUtils;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -301,10 +297,8 @@ public class CameraSource {
       throw new IOException("Could not find requested camera.");
     }
     Camera camera = Camera.open(requestedCameraId);
-    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
-    SizePair sizePair = new SizePair(
-            Size.parseSize(sharedPreferences.getString(activity.getString(R.string.pref_key_front_camera_preview_size), null)),
-            Size.parseSize(sharedPreferences.getString(activity.getString(R.string.pref_key_front_camera_picture_size), null)));
+
+    SizePair sizePair = PreferenceUtils.getCameraPreviewSizePair(activity, requestedCameraId);
     if (sizePair == null) {
       sizePair =
           selectSizePair(

@@ -26,14 +26,11 @@ import android.os.Build.VERSION_CODES;
 import android.preference.ListPreference;
 import android.preference.PreferenceCategory;
 import android.util.Size;
-
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.StringRes;
 import androidx.camera.core.CameraSelector;
-
 import com.google.mlkit.vision.demo.R;
-
 import java.util.Arrays;
 import java.util.List;
 

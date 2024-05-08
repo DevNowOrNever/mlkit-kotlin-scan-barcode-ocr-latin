@@ -18,16 +18,15 @@ package com.google.mlkit.vision.demo.preference;
 
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
-
+import android.widget.Toast;
 import androidx.annotation.StringRes;
-
 import com.google.mlkit.vision.demo.CameraSource;
 import com.google.mlkit.vision.demo.CameraSource.SizePair;
 import com.google.mlkit.vision.demo.R;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +37,10 @@ public class LivePreviewPreferenceFragment extends PreferenceFragment {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    addPreferencesFromResource(R.xml.preference_live_preview_quickstart);
     setUpCameraPreferences();
+    setUpFaceDetectionPreferencesForStreamMode();
   }
 
   void setUpCameraPreferences() {
@@ -120,4 +122,27 @@ public class LivePreviewPreferenceFragment extends PreferenceFragment {
     }
   }
 
+  private void setUpFaceDetectionPreferencesForStreamMode() {
+    EditTextPreference minFaceSizePreference =
+        (EditTextPreference)
+            findPreference(getString(R.string.pref_key_live_preview_face_detection_min_face_size));
+    minFaceSizePreference.setSummary(minFaceSizePreference.getText());
+    minFaceSizePreference.setOnPreferenceChangeListener(
+        (preference, newValue) -> {
+          try {
+            float minFaceSize = Float.parseFloat((String) newValue);
+            if (minFaceSize >= 0.0f && minFaceSize <= 1.0f) {
+              minFaceSizePreference.setSummary((String) newValue);
+              return true;
+            }
+          } catch (NumberFormatException e) {
+            // Fall through intentionally.
+          }
+
+          Toast.makeText(
+                  this.getActivity(), R.string.pref_toast_invalid_min_face_size, Toast.LENGTH_LONG)
+              .show();
+          return false;
+        });
+  }
 }

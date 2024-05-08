@@ -17,17 +17,14 @@
 package com.google.mlkit.vision.demo;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.ViewGroup;
-
 import com.google.android.gms.common.images.Size;
-
+import com.google.mlkit.vision.demo.preference.PreferenceUtils;
 import java.io.IOException;
 
 /** Preview the camera image in the screen. */
@@ -83,10 +80,7 @@ public class CameraSourcePreview extends ViewGroup {
 
   private void startIfReady() throws IOException, SecurityException {
     if (startRequested && surfaceAvailable) {
-      SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-      String prefKey = context.getString(R.string.pref_key_camera_live_viewport);
-      var check =  sharedPreferences.getBoolean(prefKey, false);
-      if (check) {
+      if (PreferenceUtils.isCameraLiveViewportEnabled(context)) {
         cameraSource.start(surfaceView.getHolder());
       } else {
         cameraSource.start();

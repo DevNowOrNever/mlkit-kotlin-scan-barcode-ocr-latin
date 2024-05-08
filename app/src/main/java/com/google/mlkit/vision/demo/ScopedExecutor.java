@@ -17,7 +17,6 @@
 package com.google.mlkit.vision.demo;
 
 import androidx.annotation.NonNull;
-
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
 

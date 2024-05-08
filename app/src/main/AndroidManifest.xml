@@ -2,6 +2,7 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    package="com.google.mlkit.vision.demo"
     android:installLocation="auto">
     <!-- CameraX libraries require minSdkVersion 21, while this quickstart app
     supports low to 19. Needs to use overrideLibrary to make the merger tool
@@ -48,10 +49,44 @@
         </activity>
 
         <activity
+            android:name=".java.ChooserActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".java.LivePreviewActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <activity
+            android:name=".java.CameraXLivePreviewActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <activity
+            android:name=".java.CameraXSourceDemoActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <activity
+            android:name=".java.StillImageActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <activity
             android:name=".kotlin.ChooserActivity"
             android:exported="false">
         </activity>
 
+        <activity
+            android:name=".kotlin.LivePreviewActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme">
+        </activity>
 
         <activity
             android:name=".kotlin.CameraXLivePreviewActivity"
@@ -59,7 +94,21 @@
             android:theme="@style/AppTheme">
         </activity>
 
+        <activity
+            android:name=".kotlin.CameraXSourceDemoActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme">
+        </activity>
 
+        <activity
+            android:name=".kotlin.StillImageActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <activity
+            android:name=".preference.SettingsActivity"
+            android:exported="false"/>
 
     </application>
     <queries>
